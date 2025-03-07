@@ -1,0 +1,33 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:avalonia="clr-namespace:Avalonia.Controls;assembly=Avalonia.Controls"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:models="clr-namespace:MyAvaloApp.Models"
+			 x:DataType="models:Employe"
+             x:Class="MyAvaloApp.EmployeView">
+	<StackPanel>
+		<TextBlock Text="Gestion des Employés" FontSize="24" HorizontalAlignment="Center" Margin="0,20,0,20"/>
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+			<TextBox x:Name="FirstNameTextBox" Width="200" Margin="5" Watermark="FirstName" Text="{Binding FirstName}"/>
+			<TextBlock Text="{Binding ErrorsForFirstName}" Foreground="Red" />
+			<TextBox x:Name="LastNameTextBox" Width="200" Margin="5" Watermark="LastName" Text="{Binding LastName}"/>
+			<TextBlock Text="{Binding ErrorsForLastName}" Foreground="Red" />
+			<TextBox x:Name="RoleTextBox" Width="200" Margin="5" Watermark="Role" Text="{Binding Role}"/>
+			<TextBlock Text="{Binding ErrorsForRole}" Foreground="Red" />
+			<Button Content="Ajouter" Click="OnAddClick" Margin="5"/>
+		</StackPanel>
+		<ListBox x:Name="EmployeListBox" Width="600" Height="400" Margin="20" SelectionChanged="OnSelectionChanged">
+			<ListBox.ItemTemplate>
+				<DataTemplate x:DataType="models:Employe">
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="{Binding FirstName}" Margin="5"/>
+						<Button Content="Edit" Click="OnUpdateCLick" Margin="5"/>
+						<Button Content="Delete" Click="OnDeleteClick" Margin="5"/>
+					</StackPanel>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+	</StackPanel>
+</UserControl>

@@ -1,0 +1,12 @@
+# Ignorer les fichiers et répertoires de Visual Studio
+.vs/
+*.vscode/
+bin/
+obj/
+
+# Ignorer les fichiers de configuration de système d'exploitation
+.DS_Store
+Thumbs.db
+
+# Ignorer les fichiers temporaires ou de log
+*.log

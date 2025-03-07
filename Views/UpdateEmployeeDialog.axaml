@@ -1,0 +1,15 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="MyAvaloApp.UpdateEmployeeDialog"
+        Title="Modifier l'employé" Width="400" Height="300">
+	<StackPanel Margin="20">
+		<TextBlock Text="Modifier l'employé" FontSize="20" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+		<TextBox x:Name="FirstNameTextBox" Watermark="Prénom" Margin="0,5"/>
+		<TextBox x:Name="LastNameTextBox" Watermark="Nom" Margin="0,5"/>
+		<TextBox x:Name="RoleTextBox" Watermark="Rôle" Margin="0,5"/>
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+			<Button Content="Update" Click="Ok_Click" Margin="5"/>
+			<Button Content="Annuler" Click="Cancel_Click" Margin="5"/>
+		</StackPanel>
+	</StackPanel>
+</Window>
