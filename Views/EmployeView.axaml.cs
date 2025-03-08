@@ -3,6 +3,7 @@ using Avalonia.Interactivity;
 using MyAvaloApp.Models;
 using MyAvaloApp.Services;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace MyAvaloApp;
 
@@ -13,7 +14,9 @@ public partial class EmployeView : UserControl
     public EmployeView()
     {
         InitializeComponent();
-        this.DataContext = new Employe();
+        var employe = new Employe();
+        employe.Role = "USER";  // Assurez-vous que la valeur par défaut de Role est explicitement assignée.
+        DataContext = employe;
         RefreshEmployeList();
     }
     private void RefreshEmployeList()
@@ -27,9 +30,15 @@ public partial class EmployeView : UserControl
         {
             FirstName = FirstNameTextBox.Text,
             LastName = LastNameTextBox.Text,
-            Role = RoleTextBox.Text
+            Role = RoleTextBox.SelectedItem?.ToString() ?? string.Empty
         };
+        employe.ValidateFirstName();
+        employe.ValidateLastName();
 
+        if (employe.HasErrors)
+        {
+            return; // Arrêter l'exécution si le formulaire est invalide
+        }
         employeService.Add(employe);
         ResetForm();
         RefreshEmployeList();
@@ -74,7 +83,7 @@ public partial class EmployeView : UserControl
         {
             FirstNameTextBox.Text = selectedEmploye.FirstName;
             LastNameTextBox.Text = selectedEmploye.LastName;
-            RoleTextBox.Text = selectedEmploye.Role;
+            RoleTextBox.SelectedItem = selectedEmploye.Role;
         }
     }
 
@@ -82,7 +91,7 @@ public partial class EmployeView : UserControl
     {
         FirstNameTextBox.Text = string.Empty;
         LastNameTextBox.Text = string.Empty;
-        RoleTextBox.Text = string.Empty;
+        RoleTextBox.SelectedItem = "USER";
     }
 
 }

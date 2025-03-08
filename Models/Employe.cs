@@ -49,9 +49,7 @@ namespace MyAvaloApp.Models
                 if (_role != value)
                 {
                     _role = value;
-                    ValidateRole();
                     OnPropertyChanged(nameof(Role));
-                    OnPropertyChanged(nameof(ErrorsForRole));  // Ajout de la notification pour les erreurs
                 }
             }
         }
@@ -88,7 +86,7 @@ namespace MyAvaloApp.Models
             return _errors.ContainsKey(propertyName) ? _errors[propertyName] : Enumerable.Empty<string>();
         }
 
-        private void ValidateFirstName()
+        public void ValidateFirstName()
         {
             if (string.IsNullOrEmpty(_firstName))
             {
@@ -100,7 +98,7 @@ namespace MyAvaloApp.Models
             }
         }
 
-        private void ValidateLastName()
+        public void ValidateLastName()
         {
             if (string.IsNullOrEmpty(_lastName))
             {
@@ -109,18 +107,6 @@ namespace MyAvaloApp.Models
             else
             {
                 ClearError("LastName");
-            }
-        }
-
-        private void ValidateRole()
-        {
-            if (string.IsNullOrEmpty(_role))
-            {
-                AddError("Role", "Le rôle est obligatoire.");
-            }
-            else
-            {
-                ClearError("Role");
             }
         }
 
